@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div class="p-5 mb-5" style="box-shadow: 1px 1px 6px black">
+        <div style="position: relative">
+          <h2>Resizing the memcache pool</h2>
+          <div id="toggleSwitch">
+            <label class="switch">
+              <input
+                type="checkbox"
+                id="checkBoxToggle"
+                onclick="toggleMode();"
+              />
+              <span class="slider round"></span>
+            </label>
+            <span>Automatic</span>
+          </div>
+        </div>
+
+        <div id="manualMode">
+          <h4 class="text-primary my-3">Manual Mode</h4>
+          <div class="my-3">
+            Memcache pool Size:
+            <span id="poolSize" class="badge bg-dark">1</span>
+          </div>
+          <button class="btn btn-primary" onclick="resizePool(1)">
+            Increment
+          </button>
+          <button class="btn btn-dark" onclick="resizePool(-1)">
+            Decrement
+          </button>
+        </div>
+        <div id="automaticMode">
+          <h4 class="text-primary my-3">Automatic Mode</h4>
+          <h6>Max Miss Rate threshold</h6>
+          <div class="sliderBar">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              oninput="rangeValue.innerText = this.value + '%'"
+            />
+            <p id="rangeValue">0%</p>
+          </div>
+          <h6>Min Miss Rate threshold</h6>
+          <div class="sliderBar">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              oninput="rangeValue2.innerText = this.value + '%'"
+            />
+            <p id="rangeValue2">0%</p>
+          </div>
+          <h6>Ratio by which to expand the pool</h6>
+          <div class="sliderBar">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              step="2"
+              oninput="rangeValue3.innerText = this.value"
+            />
+            <p id="rangeValue3">0</p>
+            <span>%</span>
+          </div>
+          <h6>Ratio by which to shrink the pool</h6>
+          <div class="sliderBar">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              step="2"
+              oninput="rangeValue4.innerText = this.value"
+            />
+            <p id="rangeValue4">0</p>
+            <span>%</span>
+          </div>
+        </div>
+      </div>
+    
+</body>
+</html>
+<script>
+let checkBoxToggle = document.getElementById('checkBoxToggle');
+let automaticMode = document.getElementById('automaticMode');
+let manualMode = document.getElementById('manualMode');
+
+
+
+
+function toggleMode(){
+    //console.log('enter');
+    if(checkBoxToggle.checked){
+        manualMode.style.display = 'none';
+        automaticMode.style.display = 'block';
+    }else{
+        manualMode.style.display = 'block';
+        automaticMode.style.display = 'none';
+    }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<canvas id="myChart" style="height: 300px; width: 100%;"></canvas>
+    <script>
+        var xValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+        
+        new Chart("myChart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{ 
+              data: [10,20,30,40,50,60,70,80,90,10,10,20,30,40,50,60,70,80,90,20,10,20,30,40,50,60,70,80,90,30],
+              borderColor: "red",
+              fill: false
+            }, { 
+              data: [30,90,80,70,60,50,40,30,20,10,20,90,80,70,60,50,40,30,20,10,10,90,80,70,60,50,40,30,20,10],
+              borderColor: "green",
+              fill: false
+            }, { 
+              data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+              borderColor: "yellow",
+              fill: false
+            } , { 
+                data: [30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],
+                borderColor: "blue",
+                fill: false
+              } , { 
+                data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+                borderColor: "rgb(187, 18, 221)",
+                fill: false
+              }
+              ]
+          },
+          options: {
+            legend: {display: false}
+          }
+        });
+        </script>
+        <a class = 'color-box-red'>miss Rate</a>
+        <a class = 'color-box-green'>hit Rate</a>
+        <a class = 'color-box-yellow'>number of items</a>
+        <a class = 'color-box-blue'>total size of items</a>
+        <a class = 'color-box-black'>number of requests</a>

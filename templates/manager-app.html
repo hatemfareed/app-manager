@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static' , filename = 'css/manager.css')}}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <title>App-manager</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: rgb(29, 28, 28);
+            margin: 0;
+            padding: 0;
+        }
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            }
+        button {
+            width: 50%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        
+            
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 50%;
+            margin: 0 auto;
+        }  
+        form {
+            background-color: #fdfcfc;;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            border: 1px solid #000;
+        }
+         
+        .form-select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-select option {
+            color: black;
+        }
+        .form-select option:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-select option:active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-select option:visited {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-select option:link {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        input[type=number] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            width: 35%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        .column {
+            flex: 50%;
+            padding: 5px;
+        }
+        .row {
+            display: flex;
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            margin: 0;
+            padding: 0;
+        }
+        .color-box-red {
+            background-color: rgb(255, 0, 0);
+        }
+        .color-box-green {
+            background-color: green;
+        }
+        .color-box-blue {
+            background-color: blue;
+            border: 1px solid #000;
+              
+        }
+        .color-box-yellow {
+            background-color: yellow;
+        }
+        .color-box-black {
+            background-color: rgb(187, 18, 221);
+        }
+       
+        input[type=text] {
+            width: 35%;
+            padding: 5px 9px;
+            margin: -7px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 36px;
+            box-sizing: border-box;
+        }
+        
+       
+        </style>
+  
+</head>
+<body>
+    <form>
+    <canvas id="myChart" style="height: 300px; width: 100%;"></canvas>
+    <script>
+        let missdata = JSON.parse({{chartavg|tojson}});
+        let hitdata = JSON.parse({{chartavg1|tojson}});
+        let reqdata = JSON.parse({{chartavg2|tojson}});
+        let itemsdata = JSON.parse({{chartavg3|tojson}});
+        let sizedata = JSON.parse({{chartavg4|tojson}});
+        
+        var xValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+        new Chart("myChart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{ 
+              //data: [10,20,30,40,50,60,70,80,90,10,10,20,30,40,50,60,70,80,90,20,10,20,30,40,50,60,70,80,90,30],
+                data: missdata,
+              borderColor: "red",
+              fill: false
+            }, { 
+              //data: [30,90,80,70,60,50,40,30,20,10,20,90,80,70,60,50,40,30,20,10,10,90,80,70,60,50,40,30,20,10],
+              data : hitdata ,
+              borderColor: "green",
+              fill: false
+            }, { 
+              //data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+              data :  itemsdata ,
+              borderColor: "yellow",
+              fill: false
+            } , { 
+                //data: [30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],
+                data : sizedata ,
+                borderColor: "blue",
+                fill: false
+              } , { 
+                //data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+                data :  reqdata,
+                borderColor: "rgb(187, 18, 221)",
+                fill: false
+              }
+              ]
+          },
+          options: {
+            legend: {display: false}
+          }
+        });
+        </script>
+        <a class = 'color-box-red'>miss Rate</a>
+        <a class = 'color-box-green'>hit Rate</a>
+        <a class = 'color-box-yellow'>number of items</a>
+        <a class = 'color-box-blue'>total size of items</a>
+        <a class = 'color-box-black'>number of requests</a>
+</form>
+
+    <form action = '/config' method="post">
+    <h3>Configuration</h3>
+    <input type= "number" name="capacity" min="1" max="8" id="capacity" placeholder="1 - 8MB">    
+    <select name="replacement" id="replacement">
+        <option value="LRU">LRU</option>
+        <option value="RR">RR</option>
+    </select>
+    
+    <input  type="submit" value="Configure">
+    </form>
+    <form  method="post" action="/">
+        <p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class = "flash">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        </p>
+        
+        <div class="row">
+
+            <div class="column">
+                <div >
+                    <h3>Manual mode</h3>
+                    <input type="radio" name="pool_resizing" id='Manual' value = "Manual" checked>
+                    <label for="1">Manual mode</label><br>
+                    <br> <input type="submit" name ="policty" value="Grow" id="add"><br>
+                    <br> <input type="text"  value={{count}} id="num" max="8" min="1" readonly><br>
+                    <br> <input type="submit" name ="policty" value="Shrink" id="remove">
+                    
+                    <script>
+                        const add = document.getElementById("add");
+                        const remove = document.getElementById("remove");
+                        let num = document.getElementById("num");
+                        add.addEventListener('click', function() {
+                            if(num.value < 8){
+                                num.value = parseInt(num.value, 10)  + 1;
+                            }
+                        });
+                        remove.addEventListener('click', function () {
+                                if (num.value > 1 ) {
+                                    num.value =  parseInt(num.value, 10) - 1;
+                                }
+                        });
+                    </script>
+                </div>
+
+            </div>
+
+        
+            <div class="column">
+                <div >
+                    <h3>Automatic mode</h3>
+                    <input type="radio" name="pool_resizing" id='Auto' value = "Auto" >
+                    <label for="2">Automatic mode</label><br><br>
+                   
+                    <div>
+                        Max Miss Rate threshold 
+                        <br> <input type="range" min="1" max="100" value={{maxRate}} class="slider" id="max" name = 'max'>
+                        <span id="demo"></span>
+                      </div><br>
+                      <div>
+                        Min Miss Rate threshold
+                        <br><input type="range" min="1" max="100" value={{minRate}} class="slider" id="min" name = 'min'>
+                        <span id="demo2"></span>
+                    </div><br>
+                      <div>
+                        Ratio by which to expand the pool
+                        <br> <input type="range" min="1" max="3" value="2" class="slider" id="expand">
+                        <span id="demo3"></span>
+                    </div><br>
+                      <div>
+                        Ratio by which to shrink the pool
+                        
+                        <br> <input type="range" min="0" max="100" value="50" class="slider" id="shrink">
+                        <span id="demo4"></span>
+                    </div><br>
+                    <input type = 'submit' value="submit" name = 'autobutton' id ='go' >
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <form method="post" action="/clear">
+        
+        <div class="row">
+            <div class="column">
+                
+                <div >
+                    <h3>Deleting all application data </h3>
+                    <button type="submit" name = 'removedata' value = "del" >Delete All</button>
+
+                </div>
+
+            </div>
+            <div class="column">
+
+                <h3>Clearing memcache data </h3>
+                <button type="submit" name = "removedata" value = 'clr' >Clear cache</button>
+                
+            </div>
+        
+        </div>
+    </form>
+     
+
+
+    <script>
+        var slider1 = document.getElementById("max");
+        var output1 = document.getElementById("demo");
+        output1.innerHTML = slider1.value;
+        
+        slider1.oninput = function() {
+          output1.innerHTML = this.value;
+        }
+        </script>
+        <script>
+            var slider2 = document.getElementById("min");
+            var output2 = document.getElementById("demo2");
+            output2.innerHTML = slider2.value;
+            
+            slider2.oninput = function() {
+              output2.innerHTML = this.value;
+            }
+            </script>
+            <script>
+                var slider3 = document.getElementById("expand");
+                var output3 = document.getElementById("demo3");
+                output3.innerHTML = slider3.value ;
+                
+                slider3.oninput = function() {
+                  output3.innerHTML = this.value ;
+                }
+                </script>
+                <script>
+                    var slider4 = document.getElementById("shrink");
+                    var output4= document.getElementById("demo4");
+                    output4.innerHTML = slider4.value / 100;
+                    
+                    slider4.oninput = function() {
+                      output4.innerHTML = this.value / 100;
+                    }
+                    </script>
+
+</body>
+</html>

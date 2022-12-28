@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+
+
+	
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme:"light2",
+	animationEnabled: true,
+	title:{
+		text: "TIME"
+	},
+	axisY :{
+		title: "cache statistics",
+		suffix: "%"
+	},
+	toolTip: {
+		shared: "true"
+	},
+	legend:{
+		cursor:"pointer",
+		itemclick : toggleDataSeries
+	},
+	data: [{
+		type: "spline",
+		showInLegend: true,
+		yValueFormatString: "##.00mn",
+		name: "miss Rate",
+		dataPoints: [
+			{ label:"1", y: 2.22 },
+			{ label:"2", y: 2.20 },
+			{ label:"3", y: 2.44 },
+			{ label:"4", y: 2.45 },
+			{ label:"5", y: 2.58 },
+			{ label:"6", y: 2.44 },
+			{ label:"7", y: 2.40 },
+			{ label:"8", y: 2.72 },
+			{ label:"9", y: 2.66 },
+			{ label:"10", y: 3.04 },
+            {label: "11", y: 8.11},
+            {label: "12", y: 0   },
+            {label: "13", y: 8.11},
+            {label: "14", y: 8.11},
+            {label: "15", y: 8.11},
+            {label: "16", y: 8.11},
+            {label: "17", y: 8.11},
+            {label: "18", y: 8.11},
+            {label: "19", y: 8.11},
+            {label: "20", y: 8.11},
+            {label: "21", y: 8.11},
+            {label: "22", y: 8.11},
+            {label: "23", y: 8.11},
+            {label: "24", y: 8.11},
+            {label: "25", y: 8.11},
+            {label: "26", y: 8.11},
+            {label: "27", y: 8.11},
+            {label: "28", y: 8.11},
+            {label: "29", y: 8.11},
+            {label: "30", y: 8.11},
+		]
+	},
+	{
+		type: "spline", 
+		showInLegend: true,
+		
+		yValueFormatString: "##.00mn",
+		name: "hit Rate",
+		dataPoints: [
+			{ label:"1", y: 3.86 },
+			{ label:"2", y: 3.76 },
+			{ label:"3", y: 3.77 },
+			{ label:"4", y: 3.65 },
+			{ label:"5", y: 3.90 },
+			{ label:"6", y: 3.88 },
+			{ label:"7", y: 3.69 },
+			{ label:"8", y: 3.86 },
+			{ label:"9", y: 3.38 },
+			{ label:"10", y: 4.20 },
+            {label: "11", y: 8.11},
+            {label: "12", y: 8.11},
+            {label: "13", y: 8.11},
+            {label: "14", y: 8.11},
+            {label: "15", y: 8.11},
+            {label: "16", y: 8.11},
+            {label: "17", y: 8.11},
+            {label: "18", y: 8.11},
+            {label: "19", y: 8.11},
+            {label: "20", y: 8.11},
+            {label: "21", y: 8.11},
+            {label: "22", y: 8.11},
+            {label: "23", y: 8.11},
+            {label: "24", y: 8.11},
+            {label: "25", y: 8.11},
+            {label: "26", y: 8.11},
+            {label: "27", y: 8.11},
+            {label: "28", y: 8},
+            {label: "29", y: 8.11},
+            {label: "30", y: 8.11},
+		]
+	},
+	{
+		type: "spline",
+		
+		showInLegend: true,
+		yValueFormatString: "##.00mn",
+		name: "number of items",
+		dataPoints: [
+			{ label:"1", y: 4.37 },
+			{ label:"2", y: 4.27 },
+			{ label:"3", y: 4.72 },
+			{ label:"4", y: 4.87 },
+			{ label:"5", y: 5.35 },
+			{ label:"6", y: 5.50 },
+			{ label:"7", y: 4.84 },
+			{ label:"8", y: 4.13 },
+			{ label:"9", y: 5.22 },
+			{ label:"10", y: 5.39 },
+            {label: "11", y: 8.11},
+            {label: "12", y: 8.11},
+            {label: "13", y: 8.11},
+            {label: "14", y: 0},
+            {label: "15", y: 8.11},
+            {label: "16", y: 8.11},
+            {label: "17", y: 8.11},
+            {label: "18", y: 8.11},
+            {label: "19", y: 8.11},
+            {label: "20", y: 8.11},
+            {label: "21", y: 8.11},
+            {label: "22", y: 8.11},
+            {label: "23", y: 8.11},
+            {label: "24", y: 8.11},
+            {label: "25", y: 8.11},
+            {label: "26", y: 8.11},
+            {label: "27", y: 8.11},
+            {label: "28", y: 8.11},
+            {label: "29", y: 8.11},
+            {label: "30", y: 8.11},
+		]
+	},
+	{
+		type: "spline",
+      	
+		showInLegend: true,
+		yValueFormatString: "##.00mn",
+		name: "total size of items",
+		dataPoints: [
+			{ label:"1", y: 6.64 },
+			{ label:"2", y: 6.31 },
+			{ label:"3", y: 6.59 },
+			{ label:"4", y: 6.95 },
+			{ label:"5", y: 7.16 },
+			{ label:"6", y: 6.40 },
+			{ label:"7", y: 7.20 },
+			{ label:"8", y: 7.17 },
+			{ label:"9", y: 6.95 },
+			{ label:"10", y: 7.09 },
+            {label: "11", y: 8.11},
+            {label: "12", y: 8.11},
+            {label: "13", y: 8.11},
+            {label: "14", y: 8.11},
+            {label: "15", y: 8.11},
+            {label: "16", y: 8.11},
+            {label: "17", y: 8.11},
+            {label: "18", y: 8.11},
+            {label: "19", y: 0},
+            {label: "20", y: 8.11},
+            {label: "21", y: 8.11},
+            {label: "22", y: 8.11},
+            {label: "23", y: 8.11},
+            {label: "24", y: 8.11},
+            {label: "25", y: 8.11},
+            {label: "26", y: 8.11},
+            {label: "27", y: 8.11},
+            {label: "28", y: 8.11},
+            {label: "29", y: 8.11},
+            {label: "30", y: 8.11},
+		]
+	},
+	{
+		type: "spline", 
+		showInLegend: true,
+		yValueFormatString: "##.00mn",
+		name: "number of requests",
+		dataPoints: [
+			{ label:"1M", y: 8 },
+			{ label:"2M", y: 6.81 },
+			{ label:"3M", y: 6.71 },
+			{ label:"4M", y: 6.82 },
+			{ label:"5M", y: 6.56 },
+			{ label:"6M", y: 6.24 },
+			{ label:"7M", y: 5.40 },
+			{ label:"8M", y: 7.01 },
+			{ label:"9M", y: 7.14 },
+			{ label:"10M", y: 8.11},
+            { label: "11M", y: 8.11},
+            {label: "12M", y: 8.11},
+            {label: "13M", y: 8.11},
+            {label: "14M", y: 8.11},
+            {label: "15M", y: 8.11},
+            {label: "16M", y: 8.11},
+            {label: "17M", y: 8.11},
+            {label: "18M", y: 8.11},
+            {label: "19M", y: 8.11},
+            {label: "20M", y: 8.11},
+            {label: "21M", y: 8.11},
+            {label: "22M", y: 8.11},
+            {label: "23M", y: 8.11},
+            {label: "24M", y: 8.11},
+            {label: "25M", y: 8.11},
+            {label: "26M", y: 0},
+            {label: "27M", y: 8.11},
+            {label: "28M", y: 8.11},
+            {label: "29M", y: 8.11},
+            {label: "30M", y: 8.11},
+		]
+	}]
+});
+chart.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ){
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
